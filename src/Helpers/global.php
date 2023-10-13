@@ -14,3 +14,16 @@ if(! function_exists('app'))
         return new App();
     }
 }
+
+if(! function_exists('dd'))
+{
+    if (!function_exists('dd')) {
+        function dd(...$vars)
+        {
+            foreach ($vars as $var) {
+                var_dump($var);
+            }
+            die(1);
+        }
+    }
+}
