@@ -1,6 +1,6 @@
 {
   "name": "pashavdw/fuzionmvc",
-  "description": "fuzionmvc",
+  "description": "php framework",
   "license": "MIT",
   "autoload": {
     "files": [
@@ -16,6 +16,7 @@
       "email": "pasha.pasha12e@gmail.com"
     }
   ],
+  "minimum-stability": "stable",
   "require": {
     "php": "^8.2",
     "ext-openssl": "*",
@@ -24,6 +25,9 @@
     "symfony/finder": "^6.1"
   },
   "repositories": {
-    "packagist.org": true
+    "packagist.org": {
+      "type": "composer",
+      "url": "https://packagist.org"
+    }
   }
 }
