@@ -1,0 +1,29 @@
+{
+  "name": "pashavdw/fuzionmvc",
+  "description": "fuzionmvc",
+  "license": "MIT",
+  "autoload": {
+    "files": [
+      "src/Helpers/global.php"
+    ],
+    "psr-4": {
+      "fuzionmvc\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Pasha",
+      "email": "pasha.pasha12e@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^8.2",
+    "ext-openssl": "*",
+    "ext-json": "*",
+    "vlucas/phpdotenv": "^5.4.1",
+    "symfony/finder": "^6.1"
+  },
+  "repositories": {
+    "packagist.org": true
+  }
+}
