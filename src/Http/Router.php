@@ -4,26 +4,25 @@ namespace fuzionmvc\Http;
 
 class Router
 {
-    protected array $routes;
+    protected static array $routes = [];
 
     public function __construct($routes = [])
     {
-        $this->routes = $routes;
+        self::$routes = $routes;
     }
 
-    public function getRoutes()
+    public static function getRoutes()
     {
-        return $this->routes;
+        return self::$routes;
     }
 
-    public static function get($route, $controller): Router
+    public static function get($route, $controller): void
     {
         $newRoute = [
             'method' => 'GET',
             'route' => $route,
             'controller' => $controller,
         ];
-        return new self([$newRoute]);
+        self::$routes[] = $newRoute;
     }
-
 }

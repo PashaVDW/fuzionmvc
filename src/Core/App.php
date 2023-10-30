@@ -2,7 +2,9 @@
 
 namespace fuzionmvc\Core;
 
+use fuzionmvc\Core\Request;
 use fuzionmvc\Http\Router;
+use ReflectionMethod;
 
 class App
 {
@@ -37,12 +39,41 @@ class App
     {
         $this->request = new Request($_REQUEST);
     }
-    public function setRouting() {
-        require_once root_path() . DIRECTORY_SEPARATOR .  "routes.php";
 
-        $routes = (new \fuzionmvc\Http\Router)->getRoutes();
-        $routesArray = $routes->toArray();
-        dd($routesArray);
+    /**
+     * @throws \ReflectionException
+     */
+    public function setRouting()
+    {
+        require root_path() . DIRECTORY_SEPARATOR . 'routes.php';
+
+        $routes = Router::getRoutes();
+        $uri = $this->getURL();
+        $request = $this->getRequest(); // Get the Request object
+
+        foreach ($routes as $route) {
+            // Compare the request URL with the route string
+            if ($route['route'] === $uri) {
+                $controller = $route['controller'];
+                $controllerClass = $controller[0];
+                $controllerMethod = $controller[1];
+
+                $obj = new $controllerClass();
+
+                $method = new ReflectionMethod($obj, $controllerMethod);
+                foreach ($method->getParameters() as $arg) {
+                    if ($arg->getType() && $arg->getType()->getName() === 'fuzionmvc\\Core\\Request') {
+                        print_r('test route');
+                        return $obj->{$controllerMethod}($request); // Pass the Request object
+                    }
+                }
+
+                return $obj->{$controllerMethod}();
+            }
+        }
+
+        // Handle case when route not found
+        echo "Route not found";
     }
 
     public function prepare($path): App {
