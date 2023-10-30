@@ -33,3 +33,16 @@ if(! function_exists('base_path'))
         return define('BASE_PATH', dirname(__DIR__));
     }
 }
+
+if (!function_exists('root_path'))
+{
+    /**
+     * Get the root path
+     *
+     * @return string path
+     */
+    function root_path()
+    {
+        return App::getRootPath();
+    }
+}

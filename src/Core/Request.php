@@ -12,8 +12,4 @@ class Request {
     public function getRequest(): array {
         return $this->request;
     }
-
-    public function getUri() {
-
-    }
 }
