@@ -2,6 +2,8 @@
 
 namespace fuzionmvc\Core;
 
+use fuzionmvc\Http\Router;
+
 class App
 {
     private Request $request;
@@ -38,7 +40,9 @@ class App
     public function setRouting() {
         require_once root_path() . DIRECTORY_SEPARATOR .  "routes.php";
 
-
+        $routes = (new \fuzionmvc\Http\Router)->getRoutes();
+        $routesArray = $routes->toArray();
+        dd($routesArray);
     }
 
     public function prepare($path): App {
