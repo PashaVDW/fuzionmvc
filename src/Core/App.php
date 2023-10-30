@@ -53,10 +53,13 @@ class App
 
         foreach ($routes as $route) {
             // Compare the request URL with the route string
+            if(strtoupper($route['method']) !== $_SERVER['REQUEST_METHOD']) {
+                abort(405, "Method not allowed");
+            }
+
             if ($route['route'] === $uri) {
-                $controller = $route['controller'];
-                $controllerClass = $controller[0];
-                $controllerMethod = $controller[1];
+                $controllerClass = $route['controller'][0];
+                $controllerMethod = $route['controller'][1];
 
                 $obj = new $controllerClass();
 
@@ -76,7 +79,8 @@ class App
         echo "Route not found";
     }
 
-    public function prepare($path): App {
+    public function prepare($path): App
+    {
         return $this;
     }
 

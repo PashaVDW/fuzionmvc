@@ -16,7 +16,7 @@ class Router
         return self::$routes;
     }
 
-    public static function get($route, $controller): void
+    public static function get(string $route, array $controller): void
     {
         $newRoute = [
             'method' => 'GET',
